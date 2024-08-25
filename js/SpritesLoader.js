@@ -1,10 +1,6 @@
 export default class SpritesLoader {
-    constructor() {
-        const spritesUrls = [
-            './img/enemies.png',
-            './img/mario.png',
-            './img/world1-1.png',
-        ];
+    constructor({GameConfig}) {
+        const spritesUrls = GameConfig.spritesUrls; // Get the sprites URLs from GameConfig
 
         this.loadPromises = spritesUrls.map(url => this.loadImage(url));
         this.imagesMap = new Map(); // This will store the loaded images

@@ -1,7 +1,7 @@
 export default class GameEngine {
-    constructor({ spritesLoaderClass }) {
+    constructor({ SpritesLoader, GameConfig }) {
         // Instantiate SpritesLoader using the passed class
-        this.spritesLoader = new spritesLoaderClass();
+        this.spritesLoader = new SpritesLoader({GameConfig: GameConfig});
     }
 
     start() {

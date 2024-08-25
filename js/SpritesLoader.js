@@ -1,5 +1,7 @@
+import GameConfig from './GameConfig.js';
+
 export default class SpritesLoader {
-    constructor({GameConfig}) {
+    constructor() {
         const spritesUrls = GameConfig.spritesUrls; // Get the sprites URLs from GameConfig
 
         this.loadPromises = spritesUrls.map(url => this.loadImage(url));

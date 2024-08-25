@@ -1,18 +1,43 @@
 export default class SpritesLoader {
-    constructor(imagePath) {
-        this.imagePath = imagePath;
-        this.image = new Image();
-        // Return a promise that resolves when the image loads
-        this.promise = new Promise((resolve, reject) => {
-            this.image.onload = () => {
-                console.log(`Loaded ${this.imagePath}`);
-                resolve(this.image);
+    constructor() {
+        const spritesUrls = [
+            './img/enemies.png',
+            './img/mario.png',
+            './img/world1-1.png',
+        ];
+
+        this.loadPromises = spritesUrls.map(url => this.loadImage(url));
+        this.imagesMap = new Map(); // This will store the loaded images
+    }
+
+    loadImage(url) {
+        return new Promise((resolve, reject) => {
+            const image = new Image();
+            image.onload = () => {
+                const imageName = this.extractImageName(url);
+                this.imagesMap.set(imageName, image); // Store the image in the map with its name as the key
+                resolve(image);
             };
-            this.image.onerror = () => {
-                console.error(`Error loading ${this.imagePath}`);
-                reject(new Error(`Failed to load ${this.imagePath}`));
-            };
-            this.image.src = this.imagePath;
+            image.onerror = () => reject(new Error(`Failed to load ${url}`));
+            image.src = url;
         });
+    }
+
+    extractImageName(url) {
+        // Extract the image name from the URL (e.g., "mario" from "./img/mario.png")
+        return url.split('/').pop().split('.')[0];
+    }
+
+    loadAllSprites() {
+        // Wait for all sprites to load
+        return Promise.all(this.loadPromises)
+            .then(images => {
+                console.log('All sprites loaded successfully!');
+                return this.imagesMap; // Return the map containing all loaded images
+            })
+            .catch(error => {
+                console.error('Failed to load one or more sprites:', error);
+                throw error; // Re-throw the error for further handling
+            });
     }
 }

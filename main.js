@@ -1,18 +1,14 @@
 import SpritesLoader from './js/SpritesLoader.js';
-import GameConfig  from './js/GameConfig.js';
 
-// Load and manage sprite loading promises
-const loadPromises = GameConfig.spritesUrls.map(url => {
-    const spriteLoader = new SpritesLoader(url);
-    return spriteLoader.promise;
-});
-
-// Wait for all sprites to load
-Promise.all(loadPromises)
-    .then(images => {
-        console.log('All sprites loaded successfully!');
-        // Here you can handle the loaded images, e.g., storing them, preparing for game start, etc.
+const spritesLoader = new SpritesLoader();
+spritesLoader.loadAllSprites()
+    .then(imagesMap => {
+        console.log('Sprites are ready to be used in the game.');
+        console.log(imagesMap); // This will log the map containing all images with their names as keys
+        // Example: Access an image by its name
+        const marioImage = imagesMap.get('mario');
+        // Now you can use marioImage in your game
     })
     .catch(error => {
-        console.error('Failed to load one or more sprites:', error);
+        console.error('There was an issue loading sprites:', error);
     });

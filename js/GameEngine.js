@@ -68,11 +68,11 @@ export default class GameEngine {
     handleScroll() {
         if (this.eventHandler.inputState.right.pressed) {
             console.log('Right key pressed, scrolling...');
-            this.background.viewport.x += 5; // Adjust scrolling speed as needed
+            this.background.viewport.x += GameConfig.scrollSpeed; // Adjust scrolling speed as needed
             this.draw(); // Redraw the canvas after updating the viewport
         } else if (this.eventHandler.inputState.left.pressed) {
             console.log('Left key pressed, scrolling...');
-            this.background.viewport.x -= 5; // Adjust scrolling speed as needed
+            this.background.viewport.x -= GameConfig.scrollSpeed; // Adjust scrolling speed as needed
             this.draw(); // Redraw the canvas after updating the viewport
         }
     }

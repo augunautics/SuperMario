@@ -12,4 +12,5 @@ export default class GameConfig {
     };
 
     static aspectRatio = 2;
+    static scrollSpeed = 2;
 }

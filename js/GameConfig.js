@@ -11,6 +11,12 @@ export default class GameConfig {
         viewport: { x: 0, y: 0, width: 512, height: 480 }, // Viewport dimensions
     };
 
+    static marioData = {
+        name: 'mario',
+        position: { x: 400, y: 380, width: 32, height: 32 }, // Mario's position and size
+        crop: { x: 0, y: 8, width: 16, height: 16 }, // Crop settings for Mario's sprite
+    };
+
     static aspectRatio = 2;
     static scrollSpeed = 2;
 }

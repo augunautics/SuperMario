@@ -1,6 +1,7 @@
 import GameConfig from './GameConfig.js';
 import SpritesLoader from './SpritesLoader.js';
 import Background from './Background.js';
+import Mario from './Mario.js';
 import EventHandler from './EventHandler.js';
 
 export default class GameEngine {
@@ -48,8 +49,14 @@ export default class GameEngine {
                 this.canvas.width = world11Image.width;
                 this.canvas.height = world11Image.height;
 
-
                 this.background.setImage(world11Image);
+
+                // Create the Mario instance using the static marioData from GameConfig
+                this.mario = new Mario(GameConfig.marioData);
+
+                // Get the Mario image from the loaded images and set it to the Mario instance
+                const marioImage = imagesMap.get(this.mario.name);
+                this.mario.setImage(marioImage);
                 this.eventHandler.setupListeners();
 
                 // Draw the background
@@ -95,10 +102,12 @@ export default class GameEngine {
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height); // Fill the entire canvas with black
 
         this.background.draw(this.context, this.canvas);
+        this.mario.draw(this.context, this.canvas);
     }
 
     updateGame() {
         // This is where you would update the game state and render the background
         console.log(this.background);
+        console.log(this.mario);
     }
 }

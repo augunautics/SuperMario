@@ -2,6 +2,8 @@ export default class GameConfig {
 
     static aspectRatio = 4;
     static scrollSpeed = 2;
+
+    static mapFilePath = '../MarioMap.json';
     
     static spritesUrls = [
         './img/enemies.png',

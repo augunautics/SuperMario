@@ -1,4 +1,8 @@
 export default class GameConfig {
+
+    static aspectRatio = 4;
+    static scrollSpeed = 2;
+    
     static spritesUrls = [
         './img/enemies.png',
         './img/mario.png',
@@ -13,10 +17,9 @@ export default class GameConfig {
 
     static marioData = {
         name: 'mario',
-        position: { x: 400, y: 816, width: 32, height: 32 }, // Mario's position and size
+        position: { x: 400, y: 816, width: 16*GameConfig.aspectRatio, height: 16*GameConfig.aspectRatio }, // Mario's position and size
         crop: { x: 0, y: 8, width: 16, height: 16 }, // Crop settings for Mario's sprite
     };
 
-    static aspectRatio = 2;
-    static scrollSpeed = 2;
+  
 }

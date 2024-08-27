@@ -13,7 +13,7 @@ export default class TiledLoader {
             this.data = await response.json();
             console.log('Tiled map loaded successfully:', this.data);
         } catch (error) {
-            console.error('Error loading JSON file:', error);
+            //console.error('Error loading JSON file:', error);
             this.data = null;
         }
     }

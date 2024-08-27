@@ -4,6 +4,7 @@ import Background from './Background.js';
 import Mario from './Mario.js';
 import EventHandler from './EventHandler.js';
 import TiledMapLoader from './TiledMapLoader.js';
+import TiledLoader from './TiledMapLoader.js';
 
 export default class GameEngine {
     constructor() {
@@ -34,8 +35,26 @@ export default class GameEngine {
 
         // Create the Background instance without setting the image yet
         this.background = new Background(GameConfig.backgroundData, this.canvas);
+        this.loadMap();
 
 
+    }
+
+    loadMap() {
+        // Load the tiled map using JsonTiledLoader
+        this.mapLoader = new TiledLoader(GameConfig.fileName);
+
+        this.mapLoader.loadJson().then(() => {
+            if (this.mapLoader.data) {
+                console.log('Tiled map loaded successfully:', this.mapLoader.data);
+
+                // Extract and utilize ground objects
+                this.groundObjects = this.mapLoader.getGroundBlocks();
+                console.log('Ground objects:', this.groundObjects);
+            } else {
+                //console.error('Failed to load the tiled map.');
+            }
+        });
     }
 
     start() {
@@ -85,7 +104,7 @@ export default class GameEngine {
                 this.groundBlocks = this.mapLoader.getGroundBlocks();
                 console.log('Ground blocks:', this.groundBlocks);
             } else {
-                console.error('Failed to load the tiled map.');
+                //console.error('Failed to load the tiled map.');
             }
         });
     }

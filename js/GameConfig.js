@@ -2,6 +2,7 @@ export default class GameConfig {
 
     static aspectRatio = 4;
     static scrollSpeed = 2;
+    static fileName = '../TiledMap.json'
     
     static spritesUrls = [
         './img/enemies.png',

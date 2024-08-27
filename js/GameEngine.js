@@ -3,6 +3,7 @@ import SpritesLoader from './SpritesLoader.js';
 import Background from './Background.js';
 import Mario from './Mario.js';
 import EventHandler from './EventHandler.js';
+import TiledMapLoader from './TiledMapLoader.js';
 
 export default class GameEngine {
     constructor() {
@@ -57,6 +58,7 @@ export default class GameEngine {
                 // Get the Mario image from the loaded images and set it to the Mario instance
                 const marioImage = imagesMap.get(this.mario.name);
                 this.mario.setImage(marioImage);
+                this.loadTiledMap();
                 this.eventHandler.setupListeners();
 
                 // Draw the background
@@ -71,6 +73,21 @@ export default class GameEngine {
             .catch(error => {
                 console.error('There was an issue loading sprites:', error);
             });
+    }
+
+    loadTiledMap() {
+        // Load the tiled map using TiledMapLoader
+        this.mapLoader = new TiledMapLoader(GameConfig.fileName);
+
+        this.mapLoader.loadJson().then(() => {
+            if (this.mapLoader.data) {
+                // Store the ground blocks for later use
+                this.groundBlocks = this.mapLoader.getGroundBlocks();
+                console.log('Ground blocks:', this.groundBlocks);
+            } else {
+                console.error('Failed to load the tiled map.');
+            }
+        });
     }
     handleScroll() {
         if (this.eventHandler.inputState.right.pressed) {

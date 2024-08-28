@@ -1,3 +1,5 @@
+import GroundBlock from './GroundBlock.js';
+
 export default class TiledLoader {
     constructor(filePath) {
         this.filePath = filePath;
@@ -19,14 +21,16 @@ export default class TiledLoader {
     }
 
     getGroundBlocks() {
+        const groundLayer = this.data.layers.find(layer => layer.name === 'ground');
         if (!this.data) {
             console.error('Data not loaded yet');
             return [];
         }
 
-        const groundLayer = this.data.layers.find(layer => layer.name === 'ground');
+        const groundBlocks = groundLayer.objects.map(objectData => new GroundBlock(objectData));
+       
         console.log(groundLayer);
-        return groundLayer ? groundLayer.objects : [];
+        return groundBlocks;
         
     }
 }

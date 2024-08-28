@@ -18,7 +18,7 @@ export default class GameConfig {
 
     static marioData = {
         name: 'mario',
-        position: { x: 400, y: 816, width: 16*GameConfig.aspectRatio, height: 16*GameConfig.aspectRatio }, // Mario's position and size
+        position: { x: 400, y: 400, width: 16*GameConfig.aspectRatio, height: 16*GameConfig.aspectRatio }, // Mario's position and size
         crop: { x: 0, y: 8, width: 16, height: 16 }, // Crop settings for Mario's sprite
     };
 
